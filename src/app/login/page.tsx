@@ -1,19 +1,19 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios"
-import toast from "react-hot-toast";
+import toast, {Toaster} from "react-hot-toast";
 
 export default function LoginPage() {
     const router = useRouter();
-    const [user, setUser] = React.useState({
+    const [user, setUser] = useState({
         email: "",
         password: "",        
     })
 
-    const [buttonDisabled, setButtonDisabled] = React.useState(false)
-    const [loading, setLoading] = React.useState(false)
+    const [buttonDisabled, setButtonDisabled] = useState(false)
+    const [loading, setLoading] = useState(false)
 
 
     const onLogin = async () => {  
@@ -62,13 +62,19 @@ export default function LoginPage() {
 
             <label htmlFor="password">password</label>
             <input 
-            className="bg-amber-50 text-gray-800 p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
+            className="bg-amber-50 text-black p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
             id="password"
             type="password" 
             value={user.password}
             onChange={(e) => setUser({...user, password: e.target.value})}
             placeholder="password"
             />
+
+            <button
+            className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 cursor-pointer"
+            >
+            <Link href={'/resetpasswordemail'}>Forgot Password?</Link>
+            </button>
 
             <button 
             onClick={onLogin}
